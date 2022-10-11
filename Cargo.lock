@@ -163,6 +163,7 @@ name = "fractal-tree"
 version = "0.1.0"
 dependencies = [
  "image",
+ "line_drawing",
 ]
 
 [[package]]
@@ -266,6 +267,15 @@ name = "libc"
 version = "0.2.135"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "68783febc7782c6c5cb401fbda4de5a9898be1762314da0bb2c10ced61f18b0c"
+
+[[package]]
+name = "line_drawing"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3d1478a313008a3e6c8149995e90a99ee9094034b5c5c3da1eeb81183cb61d1d"
+dependencies = [
+ "num-traits",
+]
 
 [[package]]
 name = "lock_api"
