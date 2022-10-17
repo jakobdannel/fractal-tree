@@ -1,11 +1,22 @@
 use image::{Rgb, RgbImage};
 extern crate line_drawing;
 use line_drawing::Bresenham;
+use structopt::StructOpt;
+
+#[derive(StructOpt)]
+struct Args {
+    #[structopt(long, short, default_value = "1000")]
+    width: u32,
+    #[structopt(long, short, default_value = "1000")]
+    height: u32,
+}
 
 fn main() {
-    let mut img = RgbImage::new(500,500);
+    let args = Args::from_args();
 
-    draw_line(&mut img, 0, 0, 499, 499);
+    let mut img = RgbImage::new(args.width, args.height);
+
+    draw_line(&mut img, 0, 0, args.width as i32 - 1, args.height as i32 - 1);
 
     img.save("./output/output.png").expect("Writing image");
 }
