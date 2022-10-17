@@ -9,6 +9,8 @@ struct Args {
     width: u32,
     #[structopt(long, short, default_value = "1000")]
     height: u32,
+    #[structopt(long, short, default_value = "6")]
+    iterations: u8
 }
 
 fn main() {
