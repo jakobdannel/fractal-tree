@@ -3,7 +3,7 @@ use std::fs;
 
 use rand::Rng;
 
-use image::{RgbImage};
+use image::RgbImage;
 extern crate line_drawing;
 use line_drawing::Bresenham;
 use structopt::StructOpt;
@@ -85,9 +85,13 @@ fn draw_tree(
     let y_end: u32 = (y_start as f32 - length * f32::sin(init_angle)) as u32;
     let color: Rgb;
     if colorful {
-        color = hsl_to_rgb((iterations as f32 / init_iterations as f32) - 0.01, 1.0, 0.5);
+        color = hsl_to_rgb(
+            (iterations as f32 / init_iterations as f32) - 0.01,
+            1.0,
+            0.5,
+        );
     } else {
-        color = hsl_to_rgb(0.0,0.0,1.0);
+        color = hsl_to_rgb(0.0, 0.0, 1.0);
     }
     draw_line(img, x_start, y_start, x_end, y_end, color);
 
