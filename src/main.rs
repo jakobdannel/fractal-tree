@@ -86,7 +86,7 @@ fn draw_tree(
     let color: Rgb;
     if colorful {
         color = hsl_to_rgb(
-            (iterations as f32 / init_iterations as f32) - 0.01,
+            (iterations as f32 / 1.99) / (init_iterations + 1) as f32,
             1.0,
             0.5,
         );
@@ -99,7 +99,7 @@ fn draw_tree(
         let mut rng = rand::thread_rng();
         draw_tree(
             img,
-            iterations,
+            init_iterations,
             iterations - 1,
             init_angle - angle + 0.4 * rng.gen::<f32>() - 0.2,
             angle,
@@ -110,7 +110,7 @@ fn draw_tree(
         );
         draw_tree(
             img,
-            iterations,
+            init_iterations,
             iterations - 1,
             init_angle + angle + 0.4 * rng.gen::<f32>() - 0.2,
             angle,
