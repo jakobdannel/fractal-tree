@@ -5,12 +5,16 @@ use rand::Rng;
 
 use image::RgbImage;
 extern crate line_drawing;
-use line_drawing::Bresenham;
 use clap::Parser;
+use line_drawing::Bresenham;
 
 /// A program to generate fractal trees
 #[derive(Parser)]
-#[command(author = "Your Name", version = "0.1.0", about = "Generates fractal trees as images")]
+#[command(
+    author = "Your Name",
+    version = "0.1.0",
+    about = "Generates fractal trees as images"
+)]
 struct Args {
     /// Width of the output image
     #[arg(long, short = 'W', default_value = "1000")]
@@ -93,7 +97,7 @@ fn draw_tree(
     y_start: u32,
     colorful: bool,
 ) {
-    length = length * 0.7;
+    length *= 0.7;
     let x_end: u32 = (x_start as f32 - length * f32::cos(init_angle)) as u32;
     let y_end: u32 = (y_start as f32 - length * f32::sin(init_angle)) as u32;
     let color: Rgb;
