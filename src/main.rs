@@ -6,21 +6,34 @@ use rand::Rng;
 use image::RgbImage;
 extern crate line_drawing;
 use line_drawing::Bresenham;
-use structopt::StructOpt;
+use clap::Parser;
 
-#[derive(StructOpt)]
+/// A program to generate fractal trees
+#[derive(Parser)]
+#[command(author = "Your Name", version = "0.1.0", about = "Generates fractal trees as images")]
 struct Args {
-    #[structopt(long, short, default_value = "1000")]
+    /// Width of the output image
+    #[arg(long, short = 'W', default_value = "1000")]
     width: u32,
-    #[structopt(long, short, default_value = "1000")]
+
+    /// Height of the output image
+    #[arg(long, short = 'H', default_value = "1000")]
     height: u32,
-    #[structopt(long, short, default_value = "11")]
+
+    /// Number of iterations for the fractal tree
+    #[arg(long, short, default_value = "11")]
     iterations: u8,
-    #[structopt(long, short, default_value = "250.0")]
+
+    /// Length of the initial branch
+    #[arg(long, short, default_value = "250.0")]
     length: f32,
-    #[structopt(long, short, default_value = "0.6")]
+
+    /// Angle between branches
+    #[arg(long, short, default_value = "0.6")]
     angle: f32,
-    #[structopt(long, short)]
+
+    /// Enable color output
+    #[arg(long, short)]
     color: bool,
 }
 
@@ -38,7 +51,7 @@ impl From<Rgb> for image::Rgb<u8> {
 }
 
 fn main() {
-    let args = Args::from_args();
+    let args = Args::parse();
 
     let mut img = RgbImage::new(args.width, args.height);
 
@@ -96,12 +109,12 @@ fn draw_tree(
     draw_line(img, x_start, y_start, x_end, y_end, color);
 
     if iterations > 0 {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         draw_tree(
             img,
             init_iterations,
             iterations - 1,
-            init_angle - angle + 0.4 * rng.gen::<f32>() - 0.2,
+            init_angle - angle + 0.4 * rng.random::<f32>() - 0.2,
             angle,
             length,
             x_end,
@@ -112,7 +125,7 @@ fn draw_tree(
             img,
             init_iterations,
             iterations - 1,
-            init_angle + angle + 0.4 * rng.gen::<f32>() - 0.2,
+            init_angle + angle + 0.4 * rng.random::<f32>() - 0.2,
             angle,
             length,
             x_end,
