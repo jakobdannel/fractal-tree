@@ -100,16 +100,15 @@ fn draw_tree(
     length *= 0.7;
     let x_end: u32 = (x_start as f32 - length * f32::cos(init_angle)) as u32;
     let y_end: u32 = (y_start as f32 - length * f32::sin(init_angle)) as u32;
-    let color: Rgb;
-    if colorful {
-        color = hsl_to_rgb(
+    let color: Rgb = if colorful {
+        hsl_to_rgb(
             (iterations as f32 / 1.99) / (init_iterations + 1) as f32,
             1.0,
             0.5,
-        );
+        )
     } else {
-        color = hsl_to_rgb(0.0, 0.0, 1.0);
-    }
+        hsl_to_rgb(0.0, 0.0, 1.0)
+    };
     draw_line(img, x_start, y_start, x_end, y_end, color);
 
     if iterations > 0 {
